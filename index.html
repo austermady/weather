@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weather Monitoring</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" href="clock.css">
+</head>
+
+<body>
+
+  <!-- navigation bar -->
+
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Weather Forcasting</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+        aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarScroll">
+        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#"></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Link
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+
+          <!-- clock -->
+          <li>
+            <div class="wrapper">
+              <div class="display">
+                <div id="time"></div>
+              </div>
+            </div>
+            <script>
+              setInterval(() => {
+                const time = document.querySelector(".display #time");
+                let date = new Date();
+                let hours = date.getHours();
+                let minutes = date.getMinutes();
+                let seconds = date.getSeconds();
+                let day_night = "AM";
+                if (hours > 12) {
+                  day_night = "PM";
+                  hours = hours - 12;
+                }
+                if (seconds < 10) {
+                  seconds = "0" + seconds;
+                }
+                if (minutes < 10) {
+                  minutes = "0" + minutes;
+                }
+                if (hours < 10) {
+                  hours = "0" + hours;
+                }
+                time.textContent = hours + ":" + minutes + ":" + seconds + " " + day_night;
+              });
+            </script>
+          </li>
+
+
+
+        </ul>
+        <form class="d-flex" role="search">
+          <input id="location" class="form-control me-2" type="search" placeholder="Search By City Name"
+            aria-label="Search">
+          <button class="btn btn-outline-success" id="submit" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- weather cards -->
+  <div class="container px-4 py-5" id="custom-cards">
+    <h2 class="pb-2 border-bottom" style="text-align: center;">WEATHER DASHBOARD FOR <span id="cityname"></span> </h2>
+    <div class="col">
+      <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="">
+        <div class="d-flex flex-column h-100 p-2 pb-3 text-white text-shadow-1">
+          <h3 style="text-align: center;">GEOPGRAPHICAL DATA</h3>
+          <ul>
+            <li> Place : <span id="place"></span></li>
+            <li> Region : <span id="region"></span></li>
+            <li> Country :<span id="country"></span></li>
+            <li> Latitude : <span id="lat"></span> </li>
+            <li> Longitude : <span id="lon"></span> </li>
+            <li> Time zone : <span id="tz_id"></span> </li>
+            <li> Local Time : <span id="localtime"></span> </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+      <div class="col">
+        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="">
+          <div class="d-flex flex-column h-100 p-2 pb-3 text-white text-shadow-1">
+            <h3>Weather info</h3>
+            <ul>
+              <li> location is <span id=""></span></li>
+              <li> Temperature is <span id=""></span></li>
+              <li> Feels like <span id="temp_f"></span></li>
+              <li> Feels like</li>
+              <li> Feels like</li>
+              <li> Feels like</li>
+              <li> Feels like</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+          style="background-image: url('unsplash-photo-2.jpg');">
+          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+            <h3>Details of AQI</h3>
+            <!-- class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold" -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
+          style="background-image: url('unsplash-photo-2.jpg');">
+          <div class="d-flex flex-column h-100 p-2 pb-3 text-white text-shadow-1">
+            <h3>Details of WQI</h3>
+            <ul>
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+  <!-- other details -->
+
+  <h2 class="display-6 text-center mb-4">Places With Highest AQI</h2>
+
+  <div class="table-responsive">
+    <table class="table text-center">
+      <thead>
+        <tr>
+          <th style="width: 34%;"></th>
+          <th style="width: 22%;">AQI</th>
+          <th style="width: 22%;">WQI</th>
+          <th style="width: 22%;">Humidity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row" class="text-start">London</th>
+          <td><svg class="bi" width="24" height="24">
+              <use xlink:href="#check"></use>
+            </svg></td>
+          <td><svg class="bi" width="24" height="24">
+              <use xlink:href="#check"></use>
+            </svg></td>
+          <td><svg class="bi" width="24" height="24">
+              <use xlink:href="#check"></use>
+            </svg></td>
+        </tr>
+        <tr>
+          <th scope="row" class="text-start">China</th>
+          <td></td>
+          <td><svg class="bi" width="24" height="24">
+              <use xlink:href="#check"></use>
+            </svg></td>
+          <td><svg class="bi" width="24" height="24">
+              <use xlink:href="#check"></use>
+            </svg></td>
+        </tr>
+      </tbody>
+
+      <tbody>
+        <tr>
+          <th scope="row" class="text-start">Pakistan</th>
+          <td><svg class="bi" width="24" height="24">
+              <use xlink:href="#check"></use>
+            </svg></td>
+          <td><svg class="bi" width="24" height="24">
+              <use xlink:href="#check"></use>
+            </svg></td>
+          <td><svg class="bi" width="24" height="24">
+              <use xlink:href="#check"></use>
+            </svg></td>
+        </tr>
+        <tr>
+          <th scope="row" class="text-start">Russia</th>
+          <td></td>
+          <td><svg class="bi" width="24" height="24">
+              <use xlink:href="#check"></use>
+            </svg></td>
+          <td><svg class="bi" width="24" height="24">
+              <use xlink:href="#check"></use>
+            </svg></td>
+        </tr>
+        <tr>
+          <th scope="row" class="text-start">Nepal</th>
+          <td></td>
+          <td><svg class="bi" width="24" height="24">
+              <use xlink:href="#check"></use>
+            </svg></td>
+          <td><svg class="bi" width="24" height="24">
+              <use xlink:href="#check"></use>
+            </svg></td>
+        </tr>
+        <tr>
+          <th scope="row" class="text-start">Bhutan</th>
+          <td></td>
+          <td></td>
+          <td><svg class="bi" width="24" height="24">
+              <use xlink:href="#check"></use>
+            </svg></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- aqi details -->
+
+  <div class="container mrnt-57">
+    <div class="row">
+
+      <div class="col-12  ">
+        <div class=" Parameters_card"><br>
+          <div class="col-12" style="margin-bottom: 11px;">
+            <center>
+              <h3 class="Parameters_heading">Air Quality Index Scale</h3>
+              <p class="Parameters_text">Know about the category of air quality index (AQI) your ambient air falls in
+                and what it implies.</p>
+            </center>
+          </div>
+          <div class="row" style="padding-left: 15px; padding-right: 15px;">
+            <div class="col-6 col-sm-6 col-md-6 aqi_scale  card_mobile_padding">
+              <div class="  Parameters_card_section" style="border-left: 16px solid #39A033;">
+                <img class="" data-src="https://www.aqi.in/assets/images/cartton_shape_4.webp"
+                  style="width:38px; height: 67px" width="38" height="67" alt="good cartoon image"
+                  src="https://www.aqi.in/assets/images/cartton_shape_4.webp">
+                <div class="Parameters_card_value">
+                  <p class="Parameters_card_value_text">Good</p>
+                  <p class="Parameters_card_value_text1">0-50</p>
+                </div>
+                <div class="Parameters_card_value_text2">The air is fresh and free from toxins. People are not exposed
+                  to any health risk. </div>
+              </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 aqi_scale card_mobile_padding ">
+              <div class="  Parameters_card_section" style="border-left: 16px solid #D4CA2F;">
+                <img class="" data-src="https://www.aqi.in/assets/images/cartton_shape_3.webp"
+                  style="width:38px; height: 67px" width="38" height="67" alt="moderate cartoon image"
+                  src="https://www.aqi.in/assets/images/cartton_shape_3.webp">
+                <div class="Parameters_card_value">
+                  <p class="Parameters_card_value_text">Moderate</p>
+                  <p class="Parameters_card_value_text1">51-100</p>
+                </div>
+                <div class="Parameters_card_value_text2">
+                  Acceptable air quality for healthy adults but mild threat to sensitive individuals. </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="padding-left: 15px; padding-right: 15px;">
+            <div class="col-6 col-sm-6 col-md-6 aqi_scale card_mobile_padding">
+              <div class="  Parameters_card_section" style="border-left: 16px solid #E75834;">
+                <img class="" data-src="https://www.aqi.in/assets/images/cartton_shape_2.webp"
+                  style="width:38px; height: 67px" width="38" height="67" alt="poor cartoon image"
+                  src="https://www.aqi.in/assets/images/cartton_shape_2.webp">
+                <div class="Parameters_card_value">
+                  <p class="Parameters_card_value_text">Poor</p>
+                  <p class="Parameters_card_value_text1">101-200</p>
+                </div>
+                <div class="Parameters_card_value_text2">
+                  Inhaling such air can cause slight discomfort and difficulty in breathing. </div>
+              </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 aqi_scale card_mobile_padding">
+              <div class="  Parameters_card_section" style="border-left: 16px solid #EA519F;">
+                <img class="" data-src="https://www.aqi.in/assets/images/cartton_shape_5.webp"
+                  style="width:38px; height: 67px" width="38" height="67" alt="unhealthy cartoon image"
+                  src="https://www.aqi.in/assets/images/cartton_shape_5.webp">
+                <div class="Parameters_card_value">
+                  <p class="Parameters_card_value_text">Unhealthy</p>
+                  <p class="Parameters_card_value_text1">201-300</p>
+                </div>
+                <div class="Parameters_card_value_text2">
+                  This could be typically problematic for children, pregnant women and the elderly. </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="padding-left: 15px; padding-right: 15px;">
+            <div class="col-6 col-sm-6 col-md-6 aqi_scale card_mobile_padding">
+              <div class="  Parameters_card_section" style="border-left: 16px solid #975AA0;">
+                <img class="" data-src="https://www.aqi.in/assets/images/cartton_shape_1.webp"
+                  style="width:38px; height: 67px" width="38" height="67" alt="severe cartoon image"
+                  src="https://www.aqi.in/assets/images/cartton_shape_1.webp">
+                <div class="Parameters_card_value">
+                  <p class="Parameters_card_value_text">Severe</p>
+                  <p class="Parameters_card_value_text1">301-400</p>
+                </div>
+                <div class="Parameters_card_value_text2">
+                  Exposure to air can cause chronic morbidities or even organ impairment. </div>
+              </div>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6 aqi_scale card_mobile_padding">
+              <div class="  Parameters_card_section" style="border-left: 16px solid #BF2133;">
+                <img class="" style="margin-left:-10px;margin-top:10px;width:auto;height:50px;" width="100" height="50"
+                  data-src="https://www.aqi.in/assets/images/cartton_shape_6.webp" alt="hazardous cartoon image"
+                  src="https://www.aqi.in/assets/images/cartton_shape_6.webp">
+                <div class="Parameters_card_value">
+                  <p class="Parameters_card_value_text">Hazardous</p>
+                  <p class="Parameters_card_value_text1">401-500<sup>+</sup></p>
+                </div>
+                <div class="Parameters_card_value_text2">
+                  Beware! Your life is in danger. Prolonged exposure can lead to premature death. </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script src="./weatherapi.js">
+  </script>
+</body>
+
+</html>
